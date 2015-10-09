@@ -1,0 +1,44 @@
+package com;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.htmlparser.Node;
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.filters.NodeClassFilter;
+import org.htmlparser.filters.OrFilter;
+import org.htmlparser.tags.LinkTag;
+import org.htmlparser.util.NodeList;
+
+public class HtmlParserTool {
+
+	public static Set<String> extracLinks(String url,LinkFilter filter){
+		
+		Set<String> links = new HashSet<String>();
+		try{
+			Parser parser = new Parser(url);
+			NodeFilter frameFilter = new NodeFilter(){
+				public boolean accept(Node node){
+				if(node.getText().startsWith("frame src=")){
+					return true;
+					
+				}else{
+					return false;
+				}
+				}
+			};
+			OrFilter linkFilter = new OrFilter(
+					new NodeClassFilter(LinkTag.class),frameFilter);
+		NodeList list = parser.extractAllNodesThatMatch(linkFilter);
+		
+		for(int i =0;i<list.size() ;i++){
+			Node tag = list.elementAt(i);
+			if(tag instanceof LinkTag){
+				
+			}
+			
+		}
+		}
+	}
+}
