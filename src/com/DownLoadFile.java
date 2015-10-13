@@ -57,13 +57,9 @@ public class DownLoadFile {
 				bufWriter.close();
 
 		} catch (ArrayIndexOutOfBoundsException e) {
-
 			System.out.println("没有指定文件");
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
 
 	}
